@@ -6,5 +6,5 @@ from django.contrib import admin
 from . import views
 urlpatterns = [
     url(r'^login/', views.login_view),
-    # url(r'^login/',),
+    url(r'^register/',views.register_view),
 ]
