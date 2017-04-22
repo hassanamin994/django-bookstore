@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from .forms.login_form import LoginForm
 from .forms.registeration_form import RegisterationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, logout
 # Create your views here.
 # inserts a user instance into the database
 def generate_user(userData):
@@ -17,6 +18,10 @@ def generate_user(userData):
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        if user is not None:
+            login(request, user)
+        return HttpResponse(user)
     else:
         form = LoginForm()
         # return HttpResponse('hello world')
