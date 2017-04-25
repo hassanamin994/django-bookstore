@@ -1,0 +1,16 @@
+{% extends 'bs_app/base.html' %}
+{%block title %}Books{% endblock %}
+
+{%block content %}
+
+
+{% for book in object_list %}
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{ book.title }}</div>
+      <div class="panel-body"> {{ book.description }} </div>
+      <div class="panel-footer"><a href="/app/books/{{book.id}}" class="btn btn-xs btn-primary">Read More..</a></div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
