@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .forms.login_form import LoginForm
 from .forms.registeration_form import RegisterationForm
@@ -14,6 +14,7 @@ def generate_user(userData):
         last_name = userData['last_name'],
         email = userData['email']
         )
+    return True
 
 def login_view(request):
     if request.method == 'POST':
@@ -21,7 +22,7 @@ def login_view(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-        return HttpResponse(user)
+        return redirect('/app/books/')
     else:
         form = LoginForm()
         # return HttpResponse('hello world')
@@ -47,9 +48,14 @@ def register_view(request):
             errors.append('Email already exists')
         # if no errors are detected, create the user
         if len(errors) == 0 and form.is_valid():
-            generate_user(userData)
+            if generate_user(userData):
+                return redirect('/auth/login/')
         # end request.method
     else:
         form = RegisterationForm()
 
     return render(request, 'registeration.html',{ 'form': form, 'errors': errors })
+
+def logout_view(request):
+    logout(request)
+    return redirect('/auth/login/')

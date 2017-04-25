@@ -13,6 +13,11 @@ class AuthenticationMiddleware(MiddlewareMixin):
                 print('None Authorized')
                 return HttpResponsePermanentRedirect('/auth/login')
 
+        # allow user to invoke logout if authenticated
+        if re.match(r'/auth/logout',request.path_info) :
+            if request.user and request.user.is_authenticated():
+                return None
+
         # Prohibits user from accessing login or registeration page if already authenticated
         if re.match(r'/auth/',request.path_info) :
             if request.user and request.user.is_authenticated():
