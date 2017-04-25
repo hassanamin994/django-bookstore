@@ -1,0 +1,23 @@
+{% extends 'bs_app/base.html' %}
+{%block title %}Books{% endblock %}
+
+{%block content %}
+
+
+{% for category in categories %}
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{ category.name }}
+        <a href="/app/categories/{{ book.category.id }}"><span class=" pull-right">{{ book.category }}</span></a>
+      </div>
+      {% if category in my_categories %}
+        <div class="panel-footer"><a href="/app/categories/{{category.id}}/unsubscribe" class="btn btn-xs btn-primary">Unsubscribe</a></div>
+      {% endif %}
+      {% if category not in my_categories %}
+        <div class="panel-footer"><a href="/app/categories/{{category.id}}/subscribe" class="btn btn-xs btn-primary">Subscribe</a></div>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
