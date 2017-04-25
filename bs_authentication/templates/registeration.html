@@ -5,11 +5,11 @@
 
 <form method="post">{% csrf_token %}
   {{ form.as_p }}
-  <input type="submit" name="" value="Register">
+  <input type="submit" name="register" value="Register">
 </form>
 <ul>
   {% for error in errors %}
-  <li>{{ error }}</li>
+  <li class="error">{{ error }}</li>
   {% endfor %}
 </ul>
 
