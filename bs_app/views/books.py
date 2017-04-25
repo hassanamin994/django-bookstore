@@ -13,8 +13,12 @@ from django.views.generic import ListView, DetailView
 #
 #     return HttpResponse('books list')
 
-class BookList(ListView):
-    model = Book
+def book_list(request):
+    books = Book.objects.all()
 
-class BookDetail(DetailView):
-    model=Book
+    return render(request, 'bs_app/book_list.html',{'object_list': books })
+
+def book_detail(request, book_id):
+    book = Book.objects.get(pk=book_id)
+
+    return render(request, 'bs_app/book_detail.html',{'object': book })
