@@ -35,7 +35,7 @@ class Profile(models.Model):
     books = models.ManyToManyField('Book',through='Rate')
 
     def __str__(self):
-        return self.user.name
+        return self.user.email
 
 #Synchronizing User model with Profile model
 @receiver(post_save, sender=User)
