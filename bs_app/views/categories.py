@@ -1,5 +1,6 @@
 from django.shortcuts import render,get_list_or_404,get_object_or_404
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.views.decorators.http import require_http_methods
 from bs_app.models import Category, Book
 from django.views.generic import ListView, DetailView
@@ -27,11 +28,11 @@ def category_detail(request, category_id):
 
 
 
-def category_subscribe(request):
-    print('subscribe')
-    # pass
+def category_subscribe(request, category_id):
+    request.user.profile.categories.add(category_id)
+    return redirect('/app/categories')
 
 
-def category_unsubscribe(request):
-    print('unsubscribe')
-    # pass
+def category_unsubscribe(request, category_id):
+    request.user.profile.categories.remove(category_id)
+    return redirect('/app/categories')

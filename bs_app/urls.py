@@ -9,6 +9,8 @@ urlpatterns = [
     url(r'^books/(?P<pk>[0-9]+)$', books.BookDetail.as_view(), name="book_detail"),
     url(r'^books/', books.BookList.as_view(),name="book_list"),
 
+    url(r'^categories/(?P<category_id>[0-9]+)/unsubscribe', categories.category_unsubscribe,name="category_detail"),
+    url(r'^categories/(?P<category_id>[0-9]+)/subscribe', categories.category_subscribe,name="category_detail"),
     url(r'^categories/(?P<category_id>[0-9]+)', categories.category_detail,name="category_detail"),
     url(r'^categories/', categories.category_list,name="category_list"),
     url(r'^admin/', admin.site.urls),
