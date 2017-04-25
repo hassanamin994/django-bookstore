@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'bs_authentication.middlewares.authenticationMiddleware.AuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'bookstore.urls'
