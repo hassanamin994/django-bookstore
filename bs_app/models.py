@@ -7,12 +7,15 @@ from django.dispatch import receiver
 class Category(models.Model):
 
     name = models.CharField(max_length=100,null=False)
+    def __str__(self):
+        return self.name
 
 class Author(models.Model):
 
     name = models.CharField(max_length=100,null=False)
     bio = models.TextField()
-
+    def __str__(self):
+        return self.name
 
 class Book(models.Model):
 
@@ -21,12 +24,18 @@ class Book(models.Model):
     authors = models.ManyToManyField('Author')
     category = models.ForeignKey('Category',on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE )
     authors = models.ManyToManyField('Author')
     categories = models.ManyToManyField('Category')
     books = models.ManyToManyField('Book',through='Rate')
+
+    def __str__(self):
+        return self.user.name
 
 #Synchronizing User model with Profile model
 @receiver(post_save, sender=User)
@@ -46,3 +55,6 @@ class Rate(models.Model):
     state = models.CharField(max_length=10,choices=STATES)
     RATES = [(1,"1"),(2,"2"),(3,"3"),(4,"4"),(5,"5"),(6,"6"),(7,"7"),(8,"8"),(9,"9"),(10,"10")]
     rate = models.CharField(max_length=2,choices=RATES)
+
+    def __str__(self):
+        return self.rate
