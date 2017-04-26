@@ -27,8 +27,17 @@
                 <a href="/app/books/{{object.id}}/wish" class="btn btn-info">Wish</a>
               {% endif %}
             </p>
-            <p>Rate:
-              <select id='rate' onchange="rate()">
+            <p>Book's Average Rate:
+              {% if average_rating < 7  %}
+              <span class="label label-danger">
+              {% else %}
+              <span class="label label-success"> 
+              {% endif %}
+              {{ average_rating }}
+              </span>
+            </p>
+            <p>Rate it:
+              <select class="form-control" id='rate' onchange="rate()">
                 <option value="">----</option>
                 {% for i in rate_list %}
                   {% if properties.rate == i  %}
