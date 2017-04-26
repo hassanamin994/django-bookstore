@@ -15,7 +15,7 @@ chromedriver = "/home/hassan/Downloads/chromedriver"
 os.environ["webdrier.chrome.driver"] = chromedriver
 driver = webdriver.Chrome(chromedriver)
 
-class TestDuckDuckGoWebsite(unittest.TestCase):
+class TesAuthentication(unittest.TestCase):
     def setUp(self):
         driver.get('http://localhost:8000/auth/register/')
         self.actions = ActionChains(driver)

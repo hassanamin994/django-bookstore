@@ -7,7 +7,26 @@
   <div class="row">
     <div class="panel panel-default">
       <div class="panel-heading">{{ object.title }}</div>
-      <div class="panel-body"> {{ object.description }} </div>
+      <div class="panel-body">
+        <div class="col-xs-8">
+          {{ object.description }}<br><br>
+          Authors:<br>
+          <ul>
+            {{ object.state }}
+            {% for author in object.authors.all %}
+              <li><a href="/app/authors/{{ author.id }}">{{ author.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-xs-4">
+          {% if properties.state != 'read'%}
+            <a href="/app/books/{{object.id}}/read" class="btn btn-primary">Read</a>
+          {% endif %}
+          {% if properties.state != 'wish' %}
+            <a href="/app/books/{{object.id}}/wish" class="btn btn-info">Wish</a>
+          {% endif %}
+        </div>
+       </div>
       <div class="panel-footer"><a href="/app/books/{{object.id}}" class="btn btn-xs btn-primary">Read More..</a></div>
     </div>
   </div>
