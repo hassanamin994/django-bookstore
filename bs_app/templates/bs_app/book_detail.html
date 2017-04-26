@@ -19,15 +19,37 @@
           </ul>
         </div>
         <div class="col-xs-4">
-          {% if properties.state != 'read'%}
-            <a href="/app/books/{{object.id}}/read" class="btn btn-primary">Read</a>
-          {% endif %}
-          {% if properties.state != 'wish' %}
-            <a href="/app/books/{{object.id}}/wish" class="btn btn-info">Wish</a>
-          {% endif %}
+            <p>
+              {% if properties.state != 'read'%}
+                <a href="/app/books/{{object.id}}/read" class="btn btn-primary">Read</a>
+              {% endif %}
+              {% if properties.state != 'wish' %}
+                <a href="/app/books/{{object.id}}/wish" class="btn btn-info">Wish</a>
+              {% endif %}
+            </p>
+            <p>Rate:
+              <select id='rate' onchange="rate()">
+                <option value="">----</option>
+                {% for i in rate_list %}
+                  {% if properties.rate == i  %}
+                    <option value="{{i}}" selected>{{i}}</option>
+                  {% else %}
+                    <option value="{{i}}">{{i}}</option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+            </p>
         </div>
        </div>
-      <div class="panel-footer"><a href="/app/books/{{object.id}}" class="btn btn-xs btn-primary">Read More..</a></div>
     </div>
   </div>
+  <script type="text/javascript">
+    function rate(){
+      new_rate = document.getElementById('rate').value
+      if(new_rate != ''){
+        window.location = window.location.href+"/rate/"+new_rate
+      }
+      console.log(window.location);
+    }
+  </script>
 {% endblock %}

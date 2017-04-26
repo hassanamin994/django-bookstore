@@ -23,7 +23,14 @@ def book_detail(request, book_id):
     rate = Rate.objects.filter(book=book_id)
     if len(rate) == 1 :
         rate = rate[0]
-    return render(request, 'bs_app/book_detail.html',{'object': book, 'properties': rate })
+    rates_list = map(str, range(1,10))
+    return render(request, 'bs_app/book_detail.html',{'object': book, 'properties': rate, 'rate_list':rates_list })
+
+def book_rate(request, book_id, new_rate):
+    rate = get_rate(request.user.profile, book_id)
+    rate.rate = str(new_rate)
+    rate.save()
+    return redirect('/app/books/'+str(book_id))
 
 def book_wish(request, book_id):
     rate = get_rate(request.user.profile, book_id)

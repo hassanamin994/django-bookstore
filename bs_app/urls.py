@@ -6,6 +6,7 @@ from .views import categories
 app_name="app"
 urlpatterns = [
     url(r'^home/', home),
+    url(r'^books/(?P<book_id>[0-9]+)/rate/(?P<new_rate>[0-9]+)$', books.book_rate, name="book_detail"),
     url(r'^books/(?P<book_id>[0-9]+)/wish$', books.book_wish, name="book_detail"),
     url(r'^books/(?P<book_id>[0-9]+)/read$', books.book_read, name="book_detail"),
     url(r'^books/(?P<book_id>[0-9]+)$', books.book_detail, name="book_detail"),
