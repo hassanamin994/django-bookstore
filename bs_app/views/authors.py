@@ -17,7 +17,9 @@ def author_detail(request, author_id):
     pass
 
 def author_subscribe(request, author_id):
-    pass
+    request.user.profile.authors.add(author_id)
+    return redirect('/app/authors')
 
 def author_unsubscribe(request, author_id):
-    pass
+    request.user.profile.authors.remove(author_id)
+    return redirect('/app/authors')
