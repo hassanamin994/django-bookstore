@@ -74,11 +74,18 @@
     <script type="text/javascript" src='/static/bs_app/js/jquery.min.js' ></script>
 
     <script type="text/javascript">
-      $('#search').click(function(e){
+
+      function search(){
         search_by = document.getElementById('search_by').value.trim()
         query = document.getElementById('query').value.trim()
         if(query != ""){
           window.location = window.location.protocol + "//" + window.location.host + "/app/search/"+ search_by +"/" + query;
+        }
+      }
+      $('#search').click(search)
+      $('#query').keypress(function(e){
+        if(e.which == 13){
+          search()
         }
       })
     </script>
