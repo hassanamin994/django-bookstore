@@ -35,6 +35,7 @@ class Profile(models.Model):
     categories = models.ManyToManyField('Category')
     books = models.ManyToManyField('Book',through='Rate')
     notifications = models.ManyToManyField('Notification')
+    last_notification_id = models.IntegerField(default=1)
 
     def __str__(self):
         return self.user.email
