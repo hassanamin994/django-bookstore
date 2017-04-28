@@ -48,7 +48,21 @@
           {% endblock %}
         </div>
         <div class="col-xs-4">
-          <!-- side bar  -->testing
+          <!-- side bar  -->
+          <h4>My Categories</h4>
+          <ul>
+            {% for category in request.user.profile.categories.all %}
+              <li><a href="/app/categories/{{category.id}}">{{category.name}}</a></li>
+            {% endfor %}
+          </ul>
+
+          <h4>My Authors</h4>
+          <ul>
+            {% for author in request.user.profile.authors.all %}
+              <li><a href="/app/authors/{{author.id}}">{{author.name}}</a></li>
+            {% endfor %}
+          </ul>
+
         </div>
       </div>
     </div>
