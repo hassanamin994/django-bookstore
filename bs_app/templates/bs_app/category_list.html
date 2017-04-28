@@ -8,8 +8,8 @@
   <div class="row">
     <div class="panel panel-default">
       <div class="panel-heading">
-        {{ category.name }}
-        <a href="/app/categories/{{ book.category.id }}"><span class=" pull-right">{{ book.category }}</span></a>
+
+        <a href="/app/categories/{{ category.id }}">{{ category.name }}</a>
       </div>
       {% if category in my_categories %}
         <div class="panel-footer"><a href="/app/categories/{{category.id}}/unsubscribe" class="btn btn-xs btn-primary unsubscribed">Unsubscribe</a></div>
