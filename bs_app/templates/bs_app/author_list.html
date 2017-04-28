@@ -1,0 +1,23 @@
+{% extends 'bs_app/base.html' %}
+{%block title %}Authors {% endblock %}
+
+{%block content %}
+
+
+{% for author in authors %}
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <a href="/app/authors/{{author.id}}">{{ author.name }}</a>
+        <a href="/app/authors/{{ book.author.id }}"><span class=" pull-right">{{ book.author }}</span></a>
+      </div>
+      {% if author in my_authors %}
+        <div class="panel-footer"><a href="/app/authors/{{author.id}}/unsubscribe" class="btn btn-xs btn-primary unsubscribed">Unsubscribe</a></div>
+      {% endif %}
+      {% if author not in my_authors %}
+        <div class="panel-footer"><a href="/app/authors/{{author.id}}/subscribe" class="btn btn-xs btn-primary subscribed">Subscribe</a></div>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
