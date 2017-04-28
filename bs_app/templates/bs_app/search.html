@@ -13,7 +13,7 @@
               {{ book.title }}
               <a href="/app/categories/{{ book.category.id }}"><span class=" pull-right">{{ book.category }}</span></a>
             </div>
-            <div class="panel-body"> {{ book.description }} </div>
+            <div class="panel-body"><img class="img-thumbnail" src="{{ book.image.url| slice:'6:' }}" alt="book_image"> </div>
             <div class="panel-footer"><a href="/app/books/{{book.id}}" class="btn btn-xs btn-primary">Read More..</a></div>
           </div>
         </div>

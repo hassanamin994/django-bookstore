@@ -9,14 +9,19 @@
       <div class="panel-heading">{{ object.title }}</div>
       <div class="panel-body">
         <div class="col-xs-8">
-          {{ object.description }}<br><br>
-          Authors:<br>
-          <ul>
-            {{ object.state }}
-            {% for author in object.authors.all %}
-              <li><a href="/app/authors/{{ author.id }}">{{ author.name }}</a></li>
-            {% endfor %}
-          </ul>
+          <div class="row">
+            <img class="img-thumbnail" src="{{ object.image.url| slice:'6:' }}" alt="book_image">
+          </div>
+          <div class="row">
+            <br><br>{{ object.description }}<br><br>
+            Authors:<br>
+            <ul>
+              {{ object.state }}
+              {% for author in object.authors.all %}
+                <li><a href="/app/authors/{{ author.id }}">{{ author.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
         <div class="col-xs-4">
             <p>

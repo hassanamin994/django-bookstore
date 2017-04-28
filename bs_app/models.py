@@ -23,6 +23,7 @@ class Book(models.Model):
     description = models.TextField(null=False)
     authors = models.ManyToManyField('Author')
     category = models.ForeignKey('Category',on_delete=models.CASCADE)
+    image = models.FileField(upload_to='bs_app/static/bs_app/images')
 
     def __str__(self):
         return self.title
