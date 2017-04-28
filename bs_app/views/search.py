@@ -15,11 +15,11 @@ from django.db.models import Avg
 #     return HttpResponse('books list')
 
 def book_search(request, query):
-    books = Book.objects.filter(title__contains=query)
+    books = Book.objects.filter(title__icontains=query)
 
     return render(request, 'bs_app/search.html',{'search_type':'book', 'books': books })
 
 def author_search(request, query):
-    authors = Author.objects.filter(name__contains=query)
+    authors = Author.objects.filter(name__icontains=query)
     my_authors = Author.objects.filter(profile=request.user.id)
     return render(request,'bs_app/search.html', {'search_type':'author', 'authors':authors,'my_authors':my_authors})
