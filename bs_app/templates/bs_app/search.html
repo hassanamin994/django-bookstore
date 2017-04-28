@@ -1,0 +1,44 @@
+{% extends 'bs_app/base.html' %}
+{%block title %}Books{% endblock %}
+
+{%block content %}
+
+
+
+      {% if search_type == 'book' %}
+        {% for book in books %}
+        <div class="row">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              {{ book.title }}
+              <a href="/app/categories/{{ book.category.id }}"><span class=" pull-right">{{ book.category }}</span></a>
+            </div>
+            <div class="panel-body"> {{ book.description }} </div>
+            <div class="panel-footer"><a href="/app/books/{{book.id}}" class="btn btn-xs btn-primary">Read More..</a></div>
+          </div>
+        </div>
+        {% empty %}
+          <h1>Sorry, no books matched your search criteria! </h1>
+        {% endfor %}
+      {% elif search_type == 'author' %}
+        {% for author in authors %}
+          <div class="row">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <a href="/app/authors/{{author.id}}">{{ author.name }}</a>
+                <a href="/app/authors/{{ book.author.id }}"><span class=" pull-right">{{ book.author }}</span></a>
+              </div>
+              {% if author in my_authors %}
+                <div class="panel-footer"><a href="/app/authors/{{author.id}}/unsubscribe" class="btn btn-xs btn-primary unsubscribed">Unsubscribe</a></div>
+              {% endif %}
+              {% if author not in my_authors %}
+                <div class="panel-footer"><a href="/app/authors/{{author.id}}/subscribe" class="btn btn-xs btn-primary subscribed">Subscribe</a></div>
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+          <h1>Sorry, No authors matched your search criteria! </h1>
+        {% endfor %}
+      {% endif %}
+
+{% endblock %}
