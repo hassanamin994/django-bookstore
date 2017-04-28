@@ -34,6 +34,7 @@ class Profile(models.Model):
     authors = models.ManyToManyField('Author')
     categories = models.ManyToManyField('Category')
     books = models.ManyToManyField('Book',through='Rate')
+    notifications = models.ManyToManyField('Notification')
 
     def __str__(self):
         return self.user.email
@@ -59,3 +60,6 @@ class Rate(models.Model):
 
     def __str__(self):
         return self.rate
+
+class Notification(models.Model):
+    body = models.CharField(max_length=300)
