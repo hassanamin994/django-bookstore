@@ -1,8 +1,43 @@
-{% extends 'base.html' %}
-{%block title %}  {% endblock %}
+{% extends 'bs_app/base.html' %}
+{%block title %} Home {% endblock %}
 
 {%block content %}
-
+<div class="row">
+  <div class="col-xs-6">
+    <h5>Latest Books in my Categories:</h5>
+    <ul>
+    {% for book in categories_books %}
+      <li>{{book.title}} <small>in {{ book.category.name }}</small></li>
+    {% endfor %}
+  </ul>
+  </div>
+  <div class="col-xs-6">
+    <h5>Latest Books published by my Authors:</h5>
+    <ul>
+      {% for book in authors_books %}
+        <li>{{book.title}} <small>Published by
+          {% for author in book.authors.all %}
+            {{ author.name }},
+          {% endfor %}
+        </small></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h4>Latest Books:</h4>
+    {% for book in latest_books %}
+    <div class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{book.title}}</div>
+        <div class="panel-body">Book image</div>
+        <div class="panel-footer"><a href="/app/books/{{book.id}}" class="btn btn-xs btn-primary ">Read More...</a></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 
 {% endblock %}
