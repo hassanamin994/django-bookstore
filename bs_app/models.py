@@ -26,7 +26,9 @@ class Book(models.Model):
     authors = models.ManyToManyField('Author')
     category = models.ForeignKey('Category',on_delete=models.CASCADE)
     image = models.FileField(upload_to='bs_app/static/bs_app/images/books', null=True)
-
+    pages = models.IntegerField(null=True)
+    published_at = models.DateField(null=True)
+    code = models.CharField(max_length=200, null=True)
     def __str__(self):
         return self.title
 
