@@ -16,7 +16,9 @@ from django.db.models import Avg
 
 def book_search(request, query):
     books = Book.objects.filter(title__icontains=query)
-
+    for book in books :
+        book.average_rate = book.rate_set.aggregate(Avg('rate'))['rate__avg']
+        print(book.average_rate)
     return render(request, 'bs_app/search.html',{'search_type':'book', 'books': books })
 
 def author_search(request, query):
