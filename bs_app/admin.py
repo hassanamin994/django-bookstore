@@ -11,7 +11,7 @@ class BookForm(forms.ModelForm):
 
         instance.save()
         notification_category_body = "A new book was added in " + instance.category.name
-        notification_category = models.Notification.objects.create(body=notification_category_body)
+        notification_category = models.Notification.objects.create(body=notification_category_body, book=instance)
         for profile in instance.category.profile_set.all():
             profile.notifications.add(notification_category)
         # print('the count is ' + str(instance.authors.all().count()))
@@ -21,7 +21,7 @@ class BookForm(forms.ModelForm):
         #     for profile in author.profile_set.all():
         #         profile.notifications.add(notification_author)
         #         profile.notifications.save()
-        # return instance
+        return instance
     class Meta:
         model=models.Book
         fields = "__all__"

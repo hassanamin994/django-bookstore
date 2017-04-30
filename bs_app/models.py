@@ -64,3 +64,4 @@ class Rate(models.Model):
 
 class Notification(models.Model):
     body = models.CharField(max_length=300)
+    book= models.ForeignKey(Book, on_delete=models.CASCADE)
