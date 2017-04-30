@@ -16,6 +16,7 @@ class Author(models.Model):
     name = models.CharField(max_length=100,null=False)
     bio = models.TextField()
     dob = models.DateField(null=True)
+    nationality = models.CharField(max_length=100, null=True)
     image = models.FileField(upload_to='bs_app/static/bs_app/images/authors', null=True)
     def __str__(self):
         return self.name
