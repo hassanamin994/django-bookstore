@@ -89,8 +89,7 @@
       $.get(window.location.origin + "/app/notifications/get", function(data, status){
         if(status){
           resp = JSON.parse(data.data)
-          console.log(resp);
-          $('.dropdown span.badge').text(resp.length)
+          $('.dropdown span.badge').text(data.new_notifications)
           notifications_body = "" ;
           for(var i = 0 ; i < resp.length; i++){
             notifications_body += "<p><a href='/app/books/" + resp[i].fields.book +"'>" + resp[i].fields.body + "</a></p>"
