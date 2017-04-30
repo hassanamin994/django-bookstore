@@ -5,6 +5,7 @@ A simple bookstore application where users can add/remove books and make reviews
 Installation :
 
 1-Make sure you have MySQL server up and running
+
 2-setup a database using this command from the terminal
 
 echo "create database django_bookstore" | mysql -u username -p
@@ -13,9 +14,10 @@ echo "create database django_bookstore" | mysql -u username -p
 
 4-Clone Repo into your favourite directory
 
-5-Enter the application's directory and make the migrations to set the database scheme
+5-Browse to the application's directory and make the migrations to set the database scheme
 
 python3 manage.py makemigrations
+
 python3 manage.py migrate
 
 5-Run the application using the following command
@@ -24,4 +26,8 @@ python3 manage.py runserver
 
 6-You can find the application running on http://localhost:8000
 
-7-Register an account to start using the app 
+7-Register an account to start using the app
+
+Contributors :
+
+Hassan Mohammed ( hassanmamin994@gmail.com )
