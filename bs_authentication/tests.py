@@ -47,6 +47,7 @@ class TesAuthentication(unittest.TestCase):
         except TimeoutException:
             pass
         self.assertRegex(driver.current_url,r'login')
+
     def test_register_fail(self):
         driver.get('http://localhost:8000/auth/register/')
         actions = ActionChains(driver)
@@ -76,7 +77,39 @@ class TesAuthentication(unittest.TestCase):
         self.assertRegex(driver.current_url,r'register')
 
     def test_login_success(self):
-        pass
+        driver.get('http://localhost:8000/auth/login/')
+        actions = ActionChains(driver)
+        username = driver.find_element_by_name('username')
+        password = driver.find_element_by_name('password')
+        submit = driver.find_element_by_name('submit')
+        actions.click(username).send_keys('hassanmamin')
+        actions.click(password).send_keys('thisistheadminuser')
+        actions.click(submit).perform()
+        try:
+            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'username'))
+            WebDriverWait(driver, 5).until(element_present)
+        except TimeoutException:
+            pass
+        self.assertRegex(driver.current_url,r'app')
+        logout = driver.find_element_by_id('logout')
+        logout.click()
+
+    def test_login_fail(self):
+        driver.get('http://localhost:8000/auth/login/')
+        actions = ActionChains(driver)
+        username = driver.find_element_by_name('username')
+        password = driver.find_element_by_name('password')
+        submit = driver.find_element_by_name('submit')
+        actions.click(username).send_keys('hassanmamin')
+        actions.click(password).send_keys('thisiswrongpassword')
+        actions.click(submit).perform()
+        try:
+            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'username'))
+            WebDriverWait(driver, 5).until(element_present)
+        except TimeoutException:
+            pass
+        self.assertRegex(driver.current_url,r'auth')
+
 
     def tearDown(self):
         # driver.quit()
