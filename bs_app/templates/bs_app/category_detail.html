@@ -3,7 +3,7 @@
 
 {%block content %}
 
-<h1>{{ category.name }}</h1>
+<h1 class='category_name'>{{ category.name }}</h1>
 <div class="image_panel"><img src="{{ category.image.url| slice:'6:' }}" alt="category" width="100" height="150" /></div>
 <ul>
   <li>Books in this category : </li>
@@ -16,12 +16,12 @@
 </ul>
   <br><br><br><br>
   {% if category in request.user.profile.categories.all %}
-    <div class="buy_now_button"><a href="/app/categories/{{category.id}}/unsubscribe">Unubscribe</a></div>
+    <div class="buy_now_button"><a class='unsubscribe' href="/app/categories/{{category.id}}/unsubscribe">Unubscribe</a></div>
   {% endif %}
   {% if category not in request.user.profile.categories.all %}
-    <div class="buy_now_button"><a href="/app/categories/{{category.id}}/subscribe">Subscribe</a></div>
+    <div class="buy_now_button"><a class='subscribe' href="/app/categories/{{category.id}}/subscribe">Subscribe</a></div>
   {% endif %}
   <br>
   {{ author.description }}
-  
+
 {% endblock %}

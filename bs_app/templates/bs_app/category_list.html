@@ -14,10 +14,10 @@
           <p>{{ category.description }}</p>
             <div class="detail_button"><a href="/app/categories/{{category.id}}">Details</a></div>
             {% if category in my_categories %}
-              <div class="buy_now_button"><a href="/app/categories/{{category.id}}/unsubscribe">Unubscribe</a></div>
+              <div class="buy_now_button"><a class='unsubscribe' href="/app/categories/{{category.id}}/unsubscribe">Unubscribe</a></div>
             {% endif %}
             {% if category not in my_categories %}
-              <div class="buy_now_button"><a href="/app/categories/{{category.id}}/subscribe">Subscribe</a></div>
+              <div class="buy_now_button"><a class='subscribe' href="/app/categories/{{category.id}}/subscribe">Subscribe</a></div>
             {% endif %}
         </div>
       </div>
