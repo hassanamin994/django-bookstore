@@ -20,13 +20,18 @@ python3 manage.py makemigrations
 
 python3 manage.py migrate
 
-5-Run the application using the following command
+6- create an admin account using the command
+
+python manage.py createsuperuser
+
+
+7-Run the application using the following command
 
 python3 manage.py runserver
 
-6-You can find the application running on http://localhost:8000
+8-You can find the application running on http://localhost:8000
 
-7-Register an account to start using the app
+9-Register an account to start using the app
 
 Contributors :
 
