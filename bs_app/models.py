@@ -7,6 +7,7 @@ from django.dispatch import receiver
 class Category(models.Model):
 
     name = models.CharField(max_length=100,null=False)
+    image = models.FileField(upload_to='bs_app/static/bs_app/images/categories', null=True)
     def __str__(self):
         return self.name
 
@@ -14,6 +15,7 @@ class Author(models.Model):
 
     name = models.CharField(max_length=100,null=False)
     bio = models.TextField()
+    image = models.FileField(upload_to='bs_app/static/bs_app/images/authors', null=True)
     def __str__(self):
         return self.name
 
@@ -23,7 +25,7 @@ class Book(models.Model):
     description = models.TextField(null=False)
     authors = models.ManyToManyField('Author')
     category = models.ForeignKey('Category',on_delete=models.CASCADE)
-    image = models.FileField(upload_to='bs_app/static/bs_app/images')
+    image = models.FileField(upload_to='bs_app/static/bs_app/images/books', null=True)
 
     def __str__(self):
         return self.title
