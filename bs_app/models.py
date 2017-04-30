@@ -8,6 +8,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=100,null=False)
     image = models.FileField(upload_to='bs_app/static/bs_app/images/categories', null=True)
+    description = models.TextField(null=True)
     def __str__(self):
         return self.name
 

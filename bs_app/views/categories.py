@@ -29,10 +29,12 @@ def category_detail(request, category_id):
 
 
 def category_subscribe(request, category_id):
-    request.user.profile.categories.add(category_id)
-    return redirect('/app/categories')
+    if request.user.profile.categories.filter(pk=category_id).count() == 0 :
+        request.user.profile.categories.add(category_id)
+    return redirect('/app/categories/'+str(category_id))
 
 
 def category_unsubscribe(request, category_id):
-    request.user.profile.categories.remove(category_id)
-    return redirect('/app/categories')
+    if request.user.profile.categories.filter(pk=category_id).count() == 1 :
+        request.user.profile.categories.remove(category_id)
+    return redirect('/app/categories/'+str(category_id))
