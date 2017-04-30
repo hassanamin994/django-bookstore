@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href='/static/bs_app/bootstrap.css'/>
+    <link rel="stylesheet" href='/static/bs_app/style.css'/>
 
   </head>
   <body>
@@ -26,6 +27,16 @@
             <li><a href="/app/books">Books</a></li>
             <li><a href="/app/authors">Authors</a></li>
             <li><a href="/app/categories">Categories</a></li>
+            <li>
+              <a href="#">
+                <div class="dropdown">
+                  <span>Notification <span class="badge"></span></span>
+                  <div class="dropdown-content">
+                    <p><a href="#"></a></p>
+                  </div>
+                </div>
+              </a>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/auth/logout/">Logout</a></li>
@@ -74,7 +85,26 @@
     <script type="text/javascript" src='/static/bs_app/js/jquery.min.js' ></script>
 
     <script type="text/javascript">
+      // notificaitons dropdown
+      $.get(window.location.origin + "/app/notifications/get", function(data, status){
+        if(status){
+          resp = JSON.parse(data.data)
+          console.log(resp);
+          $('.dropdown span.badge').text(resp.length)
+          notifications_body = "" ;
+          for(var i = 0 ; i < resp.length; i++){
+            notifications_body += "<p><a href='/app/books/" + resp[i].fields.book +"'>" + resp[i].fields.body + "</a></p>"
+          }
+          $('.dropdown .dropdown-content').html(notifications_body)
+        }
+      });
+      $('.dropdown').hover(function(e){
+        $(' span.badge').text('')
 
+      })
+
+
+      // Search functionality
       function search(){
         search_by = document.getElementById('search_by').value.trim()
         query = document.getElementById('query').value.trim()

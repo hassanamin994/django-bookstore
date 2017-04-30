@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
 from .views.home import home
-from .views import books, categories, authors, search
+from .views import books, categories, authors, search, notifications
 
 app_name="app"
 urlpatterns = [
@@ -14,6 +14,8 @@ urlpatterns = [
 
     url(r'^search/book/(?P<query>[a-zA-Z0-9]+)$', search.book_search, name="book_search"),
     url(r'^search/author/(?P<query>[a-zA-Z0-9]+)$', search.author_search, name="author_search"),
+
+    url(r'^notifications/get', notifications.get_notifications, name="get_notifications"),
 
     url(r'^authors/(?P<author_id>[0-9]+)/unsubscribe', authors.author_unsubscribe,name="author_unsubscribe"),
     url(r'^authors/(?P<author_id>[0-9]+)/subscribe', authors.author_subscribe,name="author_subscribe"),
