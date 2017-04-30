@@ -7,17 +7,17 @@
     <h5>Latest Books in my Categories:</h5>
     <ul>
     {% for book in categories_books %}
-      <li>{{book.title}} <small>in {{ book.category.name }}</small></li>
+      <li><a href="/app/books/{{book.id}}">{{book.title}}</a> <small>in <a href="/app/categories/{{book.category.id}}">{{ book.category.name }}</a></small></li>
     {% endfor %}
   </ul>
   </div>
   <div class="col-xs-6">
-    <h5>Latest Books published by my Authors:</h5>
+    <h5>Latest Books by my Authors:</h5>
     <ul>
       {% for book in authors_books %}
-        <li>{{book.title}} <small>Published by
+        <li><a href="/app/books/{{book.id}}">{{book.title}}</a><small>Published by
           {% for author in book.authors.all %}
-            {{ author.name }},
+            <a href="/app/authors/{{author.id}}">{{ author.name }}.</a>
           {% endfor %}
         </small></li>
       {% endfor %}
@@ -28,13 +28,20 @@
   <div class="col-xs-12">
     <h4>Latest Books:</h4>
     {% for book in latest_books %}
-    <div class="col-xs-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{book.title}}</div>
-        <div class="panel-body"><img class="img-thumbnail" src="{{ book.image.url| slice:'6:' }}" alt="book_image"></div>
-        <div class="panel-footer"><a href="/app/books/{{book.id}}" class="btn btn-xs btn-primary ">Read More...</a></div>
+    <div class="templatemo_product_box">
+        <h1>{{ book.title }}  <span><small>(in {{ book.category.name }})</small></span></h1>
+        <div class="col-xs-4">
+          <img src="{{ book.image.url| slice:'6:' }}" class="img-responsive" alt="image" />
+        </div>
+          <div class="col-xs-8">
+            <div class="product_info">
+              <p>{{ book.description }}</p>
+                <div class="detail_button"><a href="/app/books/{{book.id}}">Detail</a></div>
+            </div>
+          </div>
+          <div class="cleaner">&nbsp;</div>
       </div>
-    </div>
+      <div class="cleaner_with_width">&nbsp;</div>
     {% endfor %}
   </div>
 </div>
