@@ -21,11 +21,13 @@ def book_list(request):
 
 def book_detail(request, book_id):
     book = Book.objects.get(pk=book_id)
-    rate = Rate.objects.filter(book=book_id)
+    rate = Rate.objects.filter(profile=request.user.profile, book=book_id)
     if len(rate) == 1 :
         rate = rate[0]
     rates_list = map(str, range(1,10))
-    average_rate =book.rate_set.aggregate(Avg('rate'))['rate__avg']
+    average_rate = book.rate_set.aggregate(Avg('rate'))['rate__avg']
+    if average_rate == 0 :
+        average_rate = 'None'
     return render(request, 'bs_app/book_detail.html',{'object': book, 'properties': rate, 'rate_list':rates_list, 'average_rating': average_rate})
 
 def book_rate(request, book_id, new_rate):
@@ -48,10 +50,10 @@ def book_read(request, book_id):
 
 #if user didnt rate book before, create an entity for him
 def get_rate(profile, book_id):
-    if len(Rate.objects.filter(book=book_id)) == 0:
+    if len(Rate.objects.filter(profile=profile, book=book_id)) == 0:
         rate = create_rate(profile, book_id)
     else:
-        rate = Rate.objects.get(book=book_id)
+        rate = Rate.objects.get(profile=profile, book=book_id)
     return rate
 
 def create_rate(profile, book_id):

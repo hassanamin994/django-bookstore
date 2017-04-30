@@ -58,10 +58,14 @@
     </div>
   </div>
   <script type="text/javascript">
+    old_rate = document.getElementById('rate').value
     function rate(){
       new_rate = document.getElementById('rate').value
       if(new_rate != ''){
         window.location = window.location.href+"/rate/"+new_rate
+      }else{
+        alert('Can not delete rate ')
+        document.getElementById('rate').value = old_rate
       }
       console.log(window.location);
     }
