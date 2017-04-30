@@ -3,21 +3,27 @@
 
 {%block content %}
 
-
 {% for category in categories %}
-  <div class="row">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-
-        <a href="/app/categories/{{ category.id }}">{{ category.name }}</a>
-      </div>
-      {% if category in my_categories %}
-        <div class="panel-footer"><a href="/app/categories/{{category.id}}/unsubscribe" class="btn btn-xs btn-primary unsubscribed">Unsubscribe</a></div>
-      {% endif %}
-      {% if category not in my_categories %}
-        <div class="panel-footer"><a href="/app/categories/{{category.id}}/subscribe" class="btn btn-xs btn-primary subscribed">Subscribe</a></div>
-      {% endif %}
+<div class="templatemo_product_box">
+    <h1>{{ category.name }}</h1>
+    <div class="col-xs-4">
+      <img src="{{ category.image.url| slice:'6:' }}" class="img-responsive" alt="image" />
     </div>
+      <div class="col-xs-8">
+        <div class="product_info">
+          <p>{{ category.description }}</p>
+            <div class="detail_button"><a href="/app/categories/{{category.id}}">Details</a></div>
+            {% if category in my_categories %}
+              <div class="buy_now_button"><a href="/app/categories/{{category.id}}/unsubscribe">Unubscribe</a></div>
+            {% endif %}
+            {% if category not in my_categories %}
+              <div class="buy_now_button"><a href="/app/categories/{{category.id}}/subscribe">Subscribe</a></div>
+            {% endif %}
+        </div>
+      </div>
+      <div class="cleaner">&nbsp;</div>
   </div>
-{% endfor %}
-{% endblock %}
+  <div class="cleaner_with_width">&nbsp;</div>
+
+  {% endfor %}
+  {% endblock %}
