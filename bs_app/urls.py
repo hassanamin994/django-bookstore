@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^search/author/(?P<query>[a-zA-Z0-9]+)$', search.author_search, name="author_search"),
 
     url(r'^notifications/get', notifications.get_notifications, name="get_notifications"),
-    url(r'^notifications/set', notifications.set_seen, name="get_notifications"),
+    url(r'^notifications/set/(?P<notification_id>[0-9]+)$', notifications.set_seen, name="set_notifications"),
 
     url(r'^authors/(?P<author_id>[0-9]+)/unsubscribe', authors.author_unsubscribe,name="author_unsubscribe"),
     url(r'^authors/(?P<author_id>[0-9]+)/subscribe', authors.author_subscribe,name="author_subscribe"),
