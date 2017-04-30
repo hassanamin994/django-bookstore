@@ -22,5 +22,12 @@ class AuthenticationMiddleware(MiddlewareMixin):
         if re.match(r'/auth/',request.path_info) :
             if request.user and request.user.is_authenticated():
                 return HttpResponsePermanentRedirect('/app/books')
+        #redirects user if accessed / route
+        if re.match(r'^/$',request.path_info) :
+                return HttpResponsePermanentRedirect('/auth/login')
+        #redirects user if accessed /app route
+        if re.match(r'^/app$',request.path_info) :
+                return HttpResponsePermanentRedirect('/auth/login')
+
 
         return None
