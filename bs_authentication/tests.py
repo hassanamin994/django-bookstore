@@ -17,39 +17,69 @@ driver = webdriver.Chrome(chromedriver)
 
 class TesAuthentication(unittest.TestCase):
     def setUp(self):
-        driver.get('http://localhost:8000/auth/register/')
-        self.actions = ActionChains(driver)
-        self.username = driver.find_element_by_name('username')
-        self.email = driver.find_element_by_name('email')
-        self.first_name  = driver.find_element_by_name('first_name')
-        self.last_name  = driver.find_element_by_name('last_name')
-        self.password  = driver.find_element_by_name('password')
-        self.confirm_password  = driver.find_element_by_name('confirm_password')
-        self.submit = driver.find_element_by_name('register')
-        self.rndstring = str(random.randint(0,50000))
+        pass
+
 
     def test_register_success(self):
-
-        self.actions.click(self.username).send_keys("hassan"+self.rndstring)
-        self.actions.click(self.email).send_keys("hassan"+self.rndstring+"@gmail.com")
-        self.actions.click(self.first_name).send_keys("hassan")
-        self.actions.click_and_hold(self.last_name).release().send_keys("amin")
-        self.actions.click(self.password)\
+        driver.get('http://localhost:8000/auth/register/')
+        actions = ActionChains(driver)
+        username = driver.find_element_by_name('username')
+        email = driver.find_element_by_name('email')
+        first_name  = driver.find_element_by_name('first_name')
+        last_name  = driver.find_element_by_name('last_name')
+        password  = driver.find_element_by_name('password')
+        confirm_password  = driver.find_element_by_name('confirm_password')
+        submit = driver.find_element_by_name('register')
+        rndstring = str(random.randint(0,50000))
+        actions.click(username).send_keys("hassan"+rndstring)
+        actions.click(email).send_keys("hassan"+rndstring+"@gmail.com")
+        actions.click(first_name).send_keys("hassan")
+        actions.click_and_hold(last_name).release().send_keys("amin")
+        actions.click(password)\
             .send_keys('123456')
-        self.actions.click(self.confirm_password)\
+        actions.click(confirm_password)\
             .send_keys('123456')\
 
-        self.actions.click(self.submit).perform()
+        actions.click(submit).perform()
         try:
-            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'error'))
-            WebDriverWait(driver, 2).until(element_present)
+            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'username'))
+            WebDriverWait(driver, 5).until(element_present)
         except TimeoutException:
             pass
-        self.assertRaises(driver.find_element_by_class_name('errors'),NoSuchElementException)
+        self.assertRegex(driver.current_url,r'login')
+    def test_register_fail(self):
+        driver.get('http://localhost:8000/auth/register/')
+        actions = ActionChains(driver)
+        username = driver.find_element_by_name('username')
+        email = driver.find_element_by_name('email')
+        first_name  = driver.find_element_by_name('first_name')
+        last_name  = driver.find_element_by_name('last_name')
+        password  = driver.find_element_by_name('password')
+        confirm_password  = driver.find_element_by_name('confirm_password')
+        submit = driver.find_element_by_name('register')
+        rndstring = str(random.randint(0,50000))
+        actions.click(username).send_keys("hassan"+rndstring)
+        actions.click(email).send_keys("hassan"+rndstring+"@gmail.com")
+        actions.click(first_name).send_keys("hassan")
+        actions.click_and_hold(last_name).release().send_keys("amin")
+        actions.click(password)\
+            .send_keys('1234567')
+        actions.click(confirm_password)\
+            .send_keys('123456')\
 
+        actions.click(submit).perform()
+        try:
+            element_present = EC.presence_of_element_located((By.CLASS_NAME, 'username'))
+            WebDriverWait(driver, 5).until(element_present)
+        except TimeoutException:
+            pass
+        self.assertRegex(driver.current_url,r'register')
+
+    def test_login_success(self):
+        pass
 
     def tearDown(self):
-        # driver.close()
+        # driver.quit()
         pass
 
 unittest.main()

@@ -25,6 +25,9 @@ class AuthenticationMiddleware(MiddlewareMixin):
         #redirects user if accessed / route
         if re.match(r'^/$',request.path_info) :
                 return HttpResponsePermanentRedirect('/auth/login')
+        #redirects user if accessed / route
+        if re.match(r'^/auth$',request.path_info) :
+                return HttpResponsePermanentRedirect('/auth/login')
         #redirects user if accessed /app route
         if re.match(r'^/app$',request.path_info) :
                 return HttpResponsePermanentRedirect('/auth/login')
