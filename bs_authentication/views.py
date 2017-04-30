@@ -22,7 +22,7 @@ def login_view(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-        return redirect('/app/books/')
+        return redirect('/app/home/')
     else:
         form = LoginForm()
         # return HttpResponse('hello world')
